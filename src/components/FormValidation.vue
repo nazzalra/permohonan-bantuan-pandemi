@@ -8,9 +8,9 @@
         name="nama"
         id="nama"
         class="form-control"
-        :class="{ 'is-invalid': isSubmit && v$.userData.nama.$error }"
+        :class="{ 'is-invalid': isError('nama') }"
       />
-      <div v-if="isSubmit && v$.userData.nama.$error" class="invalid-feedback">
+      <div v-if="isError('nama')" class="invalid-feedback">
         <span v-if="v$.userData.nama.required.$invalid">*Wajib diisi</span>
       </div>
     </div>
@@ -23,9 +23,9 @@
         id="nik"
         name="nik"
         class="form-control"
-        :class="{ 'is-invalid': isSubmit && v$.userData.nik.$error }"
+        :class="{ 'is-invalid': isError('nik') }"
       />
-      <div v-if="isSubmit && v$.userData.nik.$error" class="invalid-feedback">
+      <div v-if="isError('nik')" class="invalid-feedback">
         <span v-if="v$.userData.nik.required.$invalid">*Wajib diisi</span>
         <span v-else-if="v$.userData.nik.numeric.$invalid">NIK hanya terdiri dari angka</span>
         <span v-else-if="v$.userData.nik.minLength.$invalid">NIK kurang dari 16 digit</span>
@@ -41,9 +41,9 @@
         id="nkk"
         name="nkk"
         class="form-control"
-        :class="{ 'is-invalid': isSubmit && v$.userData.nkk.$error }"
+        :class="{ 'is-invalid': isError('nkk') }"
       />
-      <div v-if="isSubmit && v$.userData.nkk.$error" class="invalid-feedback">
+      <div v-if="isError('nkk')" class="invalid-feedback">
         <span v-if="v$.userData.nkk.required.$invalid">*Wajib diisi</span>
         <span v-else-if="v$.userData.nkk.numeric.$invalid">NIK hanya terdiri dari angka</span>
         <span v-else-if="v$.userData.nkk.minLength.$invalid">NIK kurang dari 16 digit</span>
@@ -101,6 +101,9 @@ export default {
       this.isSubmit = true;
       this.v$.$touch();
       if (this.v$.error) return;
+    },
+    isError(data) {
+      return this.isSubmit && this.v$.userData[data].$error;
     },
   },
 };
