@@ -32,6 +32,25 @@
         <span v-else-if="v$.userData.nik.maxLength.$invalid">NIK lebih dari 16 digit</span>
       </div>
     </div>
+
+    <div class="form-group">
+      <label for="nkk" class="fw-bold">NKK</label>
+      <input
+        type="number"
+        v-model="userData.nkk"
+        id="nkk"
+        name="nkk"
+        class="form-control"
+        :class="{ 'is-invalid': isSubmit && v$.userData.nkk.$error }"
+      />
+      <div v-if="isSubmit && v$.userData.nkk.$error" class="invalid-feedback">
+        <span v-if="v$.userData.nkk.required.$invalid">*Wajib diisi</span>
+        <span v-else-if="v$.userData.nkk.numeric.$invalid">NIK hanya terdiri dari angka</span>
+        <span v-else-if="v$.userData.nkk.minLength.$invalid">NIK kurang dari 16 digit</span>
+        <span v-else-if="v$.userData.nkk.maxLength.$invalid">NIK lebih dari 16 digit</span>
+      </div>
+    </div>
+
     <div class="form-group">
       <button class="btn btn-block btn-success">Submit Data</button>
     </div>
@@ -51,6 +70,7 @@ export default {
       userData: {
         nama: "",
         nik: "",
+        nkk: "",
       },
       isSubmit: false,
     };
@@ -62,6 +82,12 @@ export default {
           required,
         },
         nik: {
+          required,
+          numeric,
+          maxLength: maxLength(16),
+          minLength: minLength(16),
+        },
+        nkk: {
           required,
           numeric,
           maxLength: maxLength(16),
