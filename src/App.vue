@@ -1,20 +1,24 @@
 <template>
-  <form-validation />
+  <div class="container">
+    <h2 class="fw-bold">Aplikasi Permohonan Bantuan Covid-19 JABAR</h2>
+    <form-validation />
+  </div>
 </template>
 
 <script>
-import FormValidation from "@/components/FormValidation"
+import FormValidation from "@/components/FormValidation";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    'form-validation': FormValidation,
-  }
-}
+    "form-validation": FormValidation,
+  },
+};
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Quicksand',Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
