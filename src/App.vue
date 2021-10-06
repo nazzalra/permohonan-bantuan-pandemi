@@ -1,13 +1,13 @@
 <template>
-  
+  <form-validation />
 </template>
 
 <script>
-
+import FormValidation from "@/components/FormValidation"
 export default {
   name: 'App',
   components: {
-    
+    'form-validation': FormValidation,
   }
 }
 </script>
