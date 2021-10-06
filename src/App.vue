@@ -16,9 +16,9 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
 #app {
-  font-family: 'Quicksand',Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Quicksand", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -26,7 +26,7 @@ export default {
   margin-top: 60px;
 }
 
-.app-container{
+.app-container {
   max-width: 500px;
   text-align: left;
 }

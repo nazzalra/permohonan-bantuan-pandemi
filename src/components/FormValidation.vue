@@ -11,7 +11,25 @@
         :class="{ 'is-invalid': isSubmit && v$.userData.nama.$error }"
       />
       <div v-if="isSubmit && v$.userData.nama.$error" class="invalid-feedback">
-          <span v-if="v$.userData.nama.required.$invalid">*Wajib diisi</span>
+        <span v-if="v$.userData.nama.required.$invalid">*Wajib diisi</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nik" class="fw-bold">NIK</label>
+      <input
+        type="number"
+        v-model="userData.nik"
+        id="nik"
+        name="nik"
+        class="form-control"
+        :class="{ 'is-invalid': isSubmit && v$.userData.nik.$error }"
+      />
+      <div v-if="isSubmit && v$.userData.nik.$error" class="invalid-feedback">
+        <span v-if="v$.userData.nik.required.$invalid">*Wajib diisi</span>
+        <span v-else-if="v$.userData.nik.numeric.$invalid">NIK hanya terdiri dari angka</span>
+        <span v-else-if="v$.userData.nik.minLength.$invalid">NIK kurang dari 16 digit</span>
+        <span v-else-if="v$.userData.nik.maxLength.$invalid">NIK lebih dari 16 digit</span>
       </div>
     </div>
     <div class="form-group">
@@ -21,17 +39,18 @@
 </template>
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
+import { required, numeric, maxLength, minLength } from "@vuelidate/validators";
 export default {
   setup() {
     return {
       v$: useVuelidate(),
-    }
+    };
   },
   data() {
     return {
       userData: {
         nama: "",
+        nik: "",
       },
       isSubmit: false,
     };
@@ -40,7 +59,13 @@ export default {
     return {
       userData: {
         nama: {
-          required
+          required,
+        },
+        nik: {
+          required,
+          numeric,
+          maxLength: maxLength(16),
+          minLength: minLength(16),
         },
       },
     };
@@ -49,7 +74,7 @@ export default {
     onSubmit() {
       this.isSubmit = true;
       this.v$.$touch();
-      if(this.v$.error) return
+      if (this.v$.error) return;
     },
   },
 };
