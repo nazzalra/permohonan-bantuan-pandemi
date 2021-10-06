@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container app-container">
     <h2 class="fw-bold">Aplikasi Permohonan Bantuan Covid-19 JABAR</h2>
     <form-validation />
   </div>
@@ -24,5 +24,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.app-container{
+  max-width: 500px;
+  text-align: left;
 }
 </style>
