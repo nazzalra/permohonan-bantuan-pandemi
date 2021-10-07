@@ -80,9 +80,8 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { required, numeric, maxLength, minLength } from "@vuelidate/validators";
-const imgFilesize = (value) => (value.size / (1024 * 1024)).toFixed(2) < 2;
-const imgFormat = (value) =>
-  ["image/png", "image/jpeg", "image/jpg", "image/bmp"].includes(value.type);
+import { imgFilesize, imgFormat } from "@/customValidator";
+
 export default {
   setup() {
     return {
