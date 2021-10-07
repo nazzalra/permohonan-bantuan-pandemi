@@ -244,6 +244,64 @@
     </div>
 
     <div class="form-group">
+      <label class="fw-bold">Alasan membutuhkan bantuan:</label>
+      <div class="form-group">
+        <div class="form-check" :class="{ 'is-invalid': isError('alasan') }">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="alasan"
+            v-model="userData.alasan.default"
+            :value="ALASANBANTUAN['1']"
+          />
+          <label class="form-check-label fw-normal">{{ ALASANBANTUAN["1"] }}</label>
+        </div>
+        <div class="form-check" :class="{ 'is-invalid': isError('alasan') }">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="alasan"
+            v-model="userData.alasan.default"
+            :value="ALASANBANTUAN['2']"
+          />
+          <label class="form-check-label fw-normal">{{ ALASANBANTUAN["2"] }}</label>
+        </div>
+        <div class="form-check" :class="{ 'is-invalid': isError('alasan') }">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="alasan"
+            v-model="userData.alasan.default"
+            :value="ALASANBANTUAN['3']"
+          />
+          <label class="form-check-label fw-normal">{{ ALASANBANTUAN["3"] }}</label>
+        </div>
+        <div class="form-check" :class="{ 'is-invalid': isError('alasan') }">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="alasan"
+            v-model="userData.alasan.default"
+            :value="ALASANBANTUAN['4']"
+          />
+          <label class="form-check-label fw-normal">{{ ALASANBANTUAN["4"] }}</label>
+        </div>
+        <div v-if="userData.alasan.default == ALASANBANTUAN['4']">
+          <input
+            type="text"
+            class="form-control"
+            v-model="userData.alasan.manual"
+            placeholder="Tulis alasan disini"
+          />
+        </div>
+
+        <div v-if="isError('alasan')" class="invalid-feedback">
+          <span v-if="isInvalid('alasan.default', 'required')">*Pilih alasan</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
       <button class="btn btn-block btn-success fw-bold">Submit Data</button>
     </div>
   </form>
@@ -252,7 +310,7 @@
 import useVuelidate from "@vuelidate/core";
 import { required, numeric, maxLength, minLength, minValue, alphaNum } from "@vuelidate/validators";
 import { imgFilesize, imgFormat } from "@/customValidator";
-import { JENISKELAMIN } from "@/enums";
+import { JENISKELAMIN, ALASANBANTUAN } from "@/enums";
 
 export default {
   setup() {
@@ -277,8 +335,13 @@ export default {
           sebelum_pandemi: "",
           setelah_pandemi: "",
         },
+        alasan: {
+          default: "",
+          manual: "",
+        },
       },
       JENISKELAMIN,
+      ALASANBANTUAN,
       isSubmit: false,
     };
   },
@@ -340,6 +403,11 @@ export default {
             numeric,
           },
         },
+        alasan: {
+          default: {
+            required,
+          },
+        },
       },
     };
   },
@@ -376,6 +444,11 @@ export default {
         currency: "IDR",
         minimumFractionDigits: 0,
       }).format(value);
+    },
+  },
+  watch: {
+    "userData.alasan.default": function() {
+      this.userData.alasan.manual = "";
     },
   },
 };
