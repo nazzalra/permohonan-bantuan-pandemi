@@ -104,7 +104,7 @@
 
     <div class="my-2">
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-6">
           <label for="umur" class="fw-bold my-1">Umur</label>
           <div class="input-group has-validation">
             <input
@@ -185,7 +185,7 @@
 
     <div>
       <div class="row">
-        <div class="col-4">
+        <div class="col-6">
           <div class="input-group has-validation">
             <span class="input-group-text fw-bold">RT</span>
             <input
@@ -203,7 +203,7 @@
             </div>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-6">
           <div class="input-group has-validation">
             <span class="input-group-text fw-bold">RW</span>
             <input
