@@ -153,6 +153,22 @@
     </div>
 
     <div class="form-group">
+      <label for="alamat">Alamat</label>
+      <input
+        type="text"
+        v-model="userData.alamat"
+        id="alamat"
+        name="alamat"
+        class="form-control"
+        :class="{ 'is-invalid': isError('alamat') }"
+      />
+      <div v-if="isError('alamat')" class="invalid-feedback">
+        <span v-if="isInvalid('alamat', 'required')">*Wajib diisi</span>
+        <span v-else-if="isInvalid('alamat', 'maxLength')">Maksimal 255 karakter</span>
+      </div>
+    </div>
+
+    <div class="form-group">
       <button class="btn btn-block btn-success fw-bold">Submit Data</button>
     </div>
   </form>
@@ -219,6 +235,10 @@ export default {
         },
         jenis_kelamin: {
           required,
+        },
+        alamat: {
+          required,
+          maxLength: maxLength(255),
         },
       },
     };
