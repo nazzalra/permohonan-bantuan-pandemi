@@ -489,7 +489,10 @@ export default {
         this.$refs[this.v$.$errors[0].$propertyPath].focus();
         return;
       }
-      console.log(this.v$);
+      console.log(this.userData);
+      setTimeout(() => {
+        console.log("Sukses mengirim data");
+      }, 1500);
     },
     isError(data) {
       let arr_data = data.split(".");
