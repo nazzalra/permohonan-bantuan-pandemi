@@ -52,7 +52,7 @@
     </div>
 
     <div class="form-group">
-      <label for="foto_ktp">Foto KTP</label>
+      <label for="foto_ktp" class="fw-bold">Foto KTP</label>
       <input
         type="file"
         @change="changeFoto($event, 'foto_ktp')"
@@ -73,7 +73,28 @@
     </div>
 
     <div class="form-group">
-      <button class="btn btn-block btn-success">Submit Data</button>
+      <label for="foto_kk" class="fw-bold">Foto KK</label>
+      <input
+        type="file"
+        @change="changeFoto($event, 'foto_kk')"
+        id="foto_kk"
+        name="foto_kk"
+        class="form-control"
+        :class="{ 'is-invalid': isError('foto_kk') }"
+      />
+      <div v-if="isError('foto_kk')" class="invalid-feedback">
+        <span v-if="isInvalid('foto_kk', 'required')">*Wajib diupload</span>
+        <span v-else-if="isInvalid('foto_kk', 'imgFilesize')"
+          >Ukuran file melebihi ukuran maksimal ( > 2MB)</span
+        >
+        <span v-else-if="isInvalid('foto_kk', 'imgFormat')"
+          >Format file tidak didukung. Gunakan format JPG,JPEG,PNG atau BMP</span
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-block btn-success fw-bold">Submit Data</button>
     </div>
   </form>
 </template>
@@ -95,6 +116,7 @@ export default {
         nik: "",
         nkk: "",
         foto_ktp: "",
+        foto_kk: "",
       },
       isSubmit: false,
     };
@@ -118,6 +140,11 @@ export default {
           minLength: minLength(16),
         },
         foto_ktp: {
+          required,
+          imgFilesize,
+          imgFormat,
+        },
+        foto_kk: {
           required,
           imgFilesize,
           imgFormat,

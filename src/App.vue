@@ -1,6 +1,6 @@
 <template>
   <div class="container app-container">
-    <h2 class="fw-bold">Aplikasi Permohonan Bantuan Covid-19 JABAR</h2>
+    <h2 class="fw-bold text-center">Aplikasi Permohonan Bantuan Covid-19 JABAR</h2>
     <form-validation />
   </div>
 </template>
