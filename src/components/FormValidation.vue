@@ -227,7 +227,7 @@
     <div class="my-2">
       <label for="penghasilan_sebelum_pandemi" class="fw-bold my-1">
         Penghasilan sebelum pandemi:
-        <span class="fw-bold" v-if="!!userData.penghasilan.sebelum_pandemi">{{
+        <span class="fw-bold d-block" v-if="!!userData.penghasilan.sebelum_pandemi">{{
           formatRupiah(userData.penghasilan.sebelum_pandemi)
         }}</span>
       </label>
@@ -250,7 +250,7 @@
     <div class="my-2">
       <label for="penghasilan_setelah_pandemi" class="fw-bold my-1">
         Penghasilan setelah pandemi:
-        <span class="fw-bold" v-if="!!userData.penghasilan.setelah_pandemi">{{
+        <span class="fw-bold d-block" v-if="!!userData.penghasilan.setelah_pandemi">{{
           formatRupiah(userData.penghasilan.setelah_pandemi)
         }}</span>
       </label>
