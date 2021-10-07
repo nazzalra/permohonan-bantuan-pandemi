@@ -352,8 +352,8 @@
         <span v-if="isInvalid('persetujuan', 'required')">*Wajib dicentang</span>
       </div>
     </div>
-    <div class="my-2">
-      <button class="btn btn-block btn-success fw-bold">Submit Data</button>
+    <div class="my-4">
+      <button class="btn btn-block btn-success fw-bold w-100">Submit Data</button>
     </div>
   </form>
 </template>
