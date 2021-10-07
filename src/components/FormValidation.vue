@@ -326,6 +326,7 @@
 
         <div v-if="isError('alasan')" class="invalid-feedback">
           <span v-if="isInvalid('alasan.default', 'required')">*Pilih alasan</span>
+          <span v-if="isInvalid('alasan.manual', 'required')">*Tulis alasannya</span>
         </div>
       </div>
     </div>
@@ -358,7 +359,15 @@
 </template>
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, numeric, maxLength, minLength, minValue, alphaNum } from "@vuelidate/validators";
+import {
+  required,
+  numeric,
+  maxLength,
+  minLength,
+  minValue,
+  alphaNum,
+  requiredIf,
+} from "@vuelidate/validators";
 import { imgFilesize, imgFormat } from "@/customValidator";
 import { JENISKELAMIN, ALASANBANTUAN } from "@/enums";
 
@@ -457,6 +466,11 @@ export default {
         alasan: {
           default: {
             required,
+          },
+          manual: {
+            required: requiredIf(function(val) {
+              return this.userData.alasan.default == "Lainnya" && val == "";
+            }),
           },
         },
         persetujuan: {
