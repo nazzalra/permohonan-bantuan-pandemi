@@ -204,6 +204,26 @@
     </div>
 
     <div class="form-group">
+      <label for="penghasilan_sebelum_pandemi" class="fw-bold">
+        Penghasilan sebelum pandemi:
+        <span class="fw-bolder" v-if="!!userData.penghasilan.sebelum_pandemi">{{
+          formatRupiah(userData.penghasilan.sebelum_pandemi)
+        }}</span>
+      </label>
+      <input
+        type="number"
+        v-model="userData.penghasilan.sebelum_pandemi"
+        id="penghasilan_sebelum_pandemi"
+        class="form-control"
+        :class="{ 'is-invalid': isError('penghasilan.sebelum_pandemi') }"
+        placeholder="Rp."
+      />
+      <div v-if="isError('penghasilan.sebelum_pandemi')" class="invalid-feedback">
+        <span v-if="isInvalid('penghasilan.sebelum_pandemi', 'required')">*Wajib diisi</span>
+      </div>
+    </div>
+
+    <div class="form-group">
       <button class="btn btn-block btn-success fw-bold">Submit Data</button>
     </div>
   </form>
@@ -233,6 +253,10 @@ export default {
         alamat: "",
         rt: "",
         rw: "",
+        penghasilan: {
+          sebelum_pandemi: "",
+          setelah_pandemi: "",
+        },
       },
       JENISKELAMIN,
       isSubmit: false,
@@ -286,6 +310,16 @@ export default {
           required,
           alphaNum,
         },
+        penghasilan: {
+          sebelum_pandemi: {
+            required,
+            numeric,
+          },
+          setelah_pandemi: {
+            required,
+            numeric,
+          },
+        },
       },
     };
   },
@@ -296,6 +330,10 @@ export default {
       if (this.v$.error) return;
     },
     isError(data) {
+      let arr_data = data.split(".");
+      if (arr_data.length == 2) {
+        return this.isSubmit && this.v$.userData[arr_data[0]][arr_data[1]].$error;
+      }
       return this.isSubmit && this.v$.userData[data].$error;
     },
     changeFoto(e, data) {
@@ -306,7 +344,18 @@ export default {
       this.userData[data] = e.target.files[0];
     },
     isInvalid(data, validator) {
+      let arr_data = data.split(".");
+      if (arr_data.length == 2) {
+        return this.v$.userData[arr_data[0]][arr_data[1]][validator].$invalid;
+      }
       return this.v$.userData[data][validator].$invalid;
+    },
+    formatRupiah(value) {
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+      }).format(value);
     },
   },
 };
