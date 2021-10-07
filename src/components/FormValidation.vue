@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <div class="form-group">
-      <label for="nama" class="fw-bold">Nama</label>
+    <div class="my-2">
+      <label for="nama" class="fw-bold my-1">Nama</label>
       <input
         type="text"
         v-model="userData.nama"
@@ -15,8 +15,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="nik" class="fw-bold">NIK</label>
+    <div class="my-2">
+      <label for="nik" class="fw-bold my-1">NIK</label>
       <input
         type="number"
         v-model="userData.nik"
@@ -33,8 +33,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="nkk" class="fw-bold">NKK</label>
+    <div class="my-2">
+      <label for="nkk" class="fw-bold my-1">NKK</label>
       <input
         type="number"
         v-model="userData.nkk"
@@ -51,8 +51,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="foto_ktp" class="fw-bold">Foto KTP</label>
+    <div class="my-2">
+      <label for="foto_ktp" class="fw-bold my-1">Foto KTP</label>
       <input
         type="file"
         @change="changeFoto($event, 'foto_ktp')"
@@ -72,8 +72,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="foto_kk" class="fw-bold">Foto KK</label>
+    <div class="my-2">
+      <label for="foto_kk" class="fw-bold my-1">Foto KK</label>
       <input
         type="file"
         @change="changeFoto($event, 'foto_kk')"
@@ -93,10 +93,10 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="my-2">
       <div class="row">
         <div class="col-sm-5">
-          <label for="umur" class="fw-bold">Umur</label>
+          <label for="umur" class="fw-bold my-1">Umur</label>
           <input
             type="number"
             v-model="userData.umur"
@@ -114,9 +114,9 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="jenis_kelamin" class="fw-bold">Jenis Kelamin</label>
-      <div class="form-group">
+    <div class="my-2">
+      <label for="jenis_kelamin" class="fw-bold my-1">Jenis Kelamin</label>
+      <div>
         <div
           class="form-check form-check-inline"
           :class="{ 'is-invalid': isError('jenis_kelamin') }"
@@ -152,8 +152,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="alamat" class="fw-bold">Alamat</label>
+    <div class="my-2">
+      <label for="alamat" class="fw-bold my-1">Alamat</label>
       <input
         type="text"
         v-model="userData.alamat"
@@ -168,7 +168,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="my-2">
       <div class="row">
         <div class="col-3">
           <input
@@ -203,8 +203,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="penghasilan_sebelum_pandemi" class="fw-bold">
+    <div class="my-2">
+      <label for="penghasilan_sebelum_pandemi" class="fw-bold my-1">
         Penghasilan sebelum pandemi:
         <span class="fw-bold" v-if="!!userData.penghasilan.sebelum_pandemi">{{
           formatRupiah(userData.penghasilan.sebelum_pandemi)
@@ -223,8 +223,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="penghasilan_setelah_pandemi" class="fw-bold">
+    <div class="my-2">
+      <label for="penghasilan_setelah_pandemi" class="fw-bold my-1">
         Penghasilan setelah pandemi:
         <span class="fw-bold" v-if="!!userData.penghasilan.setelah_pandemi">{{
           formatRupiah(userData.penghasilan.setelah_pandemi)
@@ -243,9 +243,9 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="fw-bold">Alasan membutuhkan bantuan:</label>
-      <div class="form-group">
+    <div class="my-2">
+      <label class="fw-bold my-1">Alasan membutuhkan bantuan:</label>
+      <div>
         <div class="form-check" :class="{ 'is-invalid': isError('alasan') }">
           <input
             class="form-check-input"
@@ -301,7 +301,7 @@
       </div>
     </div>
 
-    <div class="form-group form-check">
+    <div class="mt-4 form-check">
       <input
         type="checkbox"
         v-model="userData.persetujuan"
@@ -321,7 +321,7 @@
         <span v-if="isInvalid('persetujuan', 'required')">*Wajib dicentang</span>
       </div>
     </div>
-    <div class="form-group">
+    <div class="my-2">
       <button class="btn btn-block btn-success fw-bold">Submit Data</button>
     </div>
   </form>
