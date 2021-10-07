@@ -94,13 +94,33 @@
     </div>
 
     <div class="form-group">
+      <div class="row">
+        <div class="col-sm-5">
+          <label for="umur" class="fw-bold">Umur</label>
+          <input
+            type="number"
+            v-model="userData.umur"
+            id="umur"
+            name="umur"
+            class="form-control"
+            :class="{ 'is-invalid': isError('umur') }"
+          />
+          <div v-if="isError('umur')" class="invalid-feedback">
+            <span v-if="isInvalid('umur', 'required')">*Wajib diisi</span>
+            <span v-else-if="isInvalid('umur', 'numeric')">*Umur hanya terdiri dari angka</span>
+            <span v-else-if="isInvalid('umur', 'minValue')">*Minimal berumur 25 tahun</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
       <button class="btn btn-block btn-success fw-bold">Submit Data</button>
     </div>
   </form>
 </template>
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, numeric, maxLength, minLength } from "@vuelidate/validators";
+import { required, numeric, maxLength, minLength, minValue } from "@vuelidate/validators";
 import { imgFilesize, imgFormat } from "@/customValidator";
 
 export default {
@@ -117,6 +137,7 @@ export default {
         nkk: "",
         foto_ktp: "",
         foto_kk: "",
+        umur: "",
       },
       isSubmit: false,
     };
@@ -148,6 +169,11 @@ export default {
           required,
           imgFilesize,
           imgFormat,
+        },
+        umur: {
+          required,
+          numeric,
+          minValue: minValue(25),
         },
       },
     };
