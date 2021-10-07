@@ -301,6 +301,26 @@
       </div>
     </div>
 
+    <div class="form-group form-check">
+      <input
+        type="checkbox"
+        v-model="userData.persetujuan"
+        @change="v$.userData.persetujuan.$touch()"
+        id="persetujuan"
+        class="form-check-input"
+      />
+      <label
+        class="form-check-label fw-light"
+        :class="{ 'is-invalid': isError('persetujuan') }"
+        for="persetujuan"
+        >Saya menyatakan bahwa data yang diisikan adalah benar dan siap mempertanggungjawabkan
+        apabila ditemukan ketidaksesuaian dalam data tersebut.</label
+      >
+
+      <div v-if="isError('persetujuan')" class="invalid-feedback">
+        <span v-if="isInvalid('persetujuan', 'required')">*Wajib dicentang</span>
+      </div>
+    </div>
     <div class="form-group">
       <button class="btn btn-block btn-success fw-bold">Submit Data</button>
     </div>
@@ -339,6 +359,7 @@ export default {
           default: "",
           manual: "",
         },
+        persetujuan: "",
       },
       JENISKELAMIN,
       ALASANBANTUAN,
@@ -407,6 +428,9 @@ export default {
           default: {
             required,
           },
+        },
+        persetujuan: {
+          required,
         },
       },
     };
