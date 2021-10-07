@@ -206,7 +206,7 @@
     <div class="form-group">
       <label for="penghasilan_sebelum_pandemi" class="fw-bold">
         Penghasilan sebelum pandemi:
-        <span class="fw-bolder" v-if="!!userData.penghasilan.sebelum_pandemi">{{
+        <span class="fw-bold" v-if="!!userData.penghasilan.sebelum_pandemi">{{
           formatRupiah(userData.penghasilan.sebelum_pandemi)
         }}</span>
       </label>
@@ -220,6 +220,26 @@
       />
       <div v-if="isError('penghasilan.sebelum_pandemi')" class="invalid-feedback">
         <span v-if="isInvalid('penghasilan.sebelum_pandemi', 'required')">*Wajib diisi</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="penghasilan_setelah_pandemi" class="fw-bold">
+        Penghasilan setelah pandemi:
+        <span class="fw-bold" v-if="!!userData.penghasilan.setelah_pandemi">{{
+          formatRupiah(userData.penghasilan.setelah_pandemi)
+        }}</span>
+      </label>
+      <input
+        type="number"
+        v-model="userData.penghasilan.setelah_pandemi"
+        id="penghasilan_setelah_pandemi"
+        class="form-control"
+        :class="{ 'is-invalid': isError('penghasilan.setelah_pandemi') }"
+        placeholder="Rp."
+      />
+      <div v-if="isError('penghasilan.setelah_pandemi')" class="invalid-feedback">
+        <span v-if="isInvalid('penghasilan.setelah_pandemi', 'required')">*Wajib diisi</span>
       </div>
     </div>
 
