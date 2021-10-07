@@ -113,6 +113,45 @@
         </div>
       </div>
     </div>
+
+    <div class="form-group">
+      <label for="jenis_kelamin" class="fw-bold">Jenis Kelamin</label>
+      <div class="form-group">
+        <div
+          class="form-check form-check-inline"
+          :class="{ 'is-invalid': isError('jenis_kelamin') }"
+        >
+          <input
+            class="form-check-input"
+            type="radio"
+            name="jenis_kelamin"
+            v-model="userData.jenis_kelamin"
+            id="lakilaki"
+            :value="JENISKELAMIN.L"
+          />
+          <label class="form-check-label fw-normal" for="lakilaki">Laki-Laki</label>
+        </div>
+        <div
+          class="form-check form-check-inline"
+          :class="{ 'is-invalid': isError('jenis_kelamin') }"
+        >
+          <input
+            class="form-check-input"
+            type="radio"
+            name="jenis_kelamin"
+            v-model="userData.jenis_kelamin"
+            id="perempuan"
+            :value="JENISKELAMIN.P"
+          />
+          <label class="form-check-label fw-normal" for="perempuan">Perempuan</label>
+        </div>
+
+        <div v-if="isError('jenis_kelamin')" class="invalid-feedback">
+          <span v-if="isInvalid('jenis_kelamin', 'required')">*Pilih jenis kelamin</span>
+        </div>
+      </div>
+    </div>
+
     <div class="form-group">
       <button class="btn btn-block btn-success fw-bold">Submit Data</button>
     </div>
@@ -122,6 +161,7 @@
 import useVuelidate from "@vuelidate/core";
 import { required, numeric, maxLength, minLength, minValue } from "@vuelidate/validators";
 import { imgFilesize, imgFormat } from "@/customValidator";
+import { JENISKELAMIN } from "@/enums";
 
 export default {
   setup() {
@@ -138,7 +178,9 @@ export default {
         foto_ktp: "",
         foto_kk: "",
         umur: "",
+        jenis_kelamin: "",
       },
+      JENISKELAMIN,
       isSubmit: false,
     };
   },
@@ -174,6 +216,9 @@ export default {
           required,
           numeric,
           minValue: minValue(25),
+        },
+        jenis_kelamin: {
+          required,
         },
       },
     };
