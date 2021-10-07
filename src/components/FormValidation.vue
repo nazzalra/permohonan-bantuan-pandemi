@@ -153,7 +153,7 @@
     </div>
 
     <div class="form-group">
-      <label for="alamat">Alamat</label>
+      <label for="alamat" class="fw-bold">Alamat</label>
       <input
         type="text"
         v-model="userData.alamat"
@@ -169,13 +169,48 @@
     </div>
 
     <div class="form-group">
+      <div class="row">
+        <div class="col-3">
+          <input
+            type="text"
+            v-model="userData.rt"
+            id="rt"
+            name="rt"
+            class="form-control"
+            :class="{ 'is-invalid': isError('rt') }"
+            placeholder="RT"
+          />
+          <div v-if="isError('rt')" class="invalid-feedback">
+            <span v-if="isInvalid('rt', 'required')">*Wajib diisi</span>
+            <span v-else-if="isInvalid('rt', 'alphaNum')">Alfabet atau Numerik</span>
+          </div>
+        </div>
+        <div class="col-3">
+          <input
+            type="text"
+            v-model="userData.rw"
+            id="rw"
+            name="rw"
+            class="form-control"
+            :class="{ 'is-invalid': isError('rw') }"
+            placeholder="RW"
+          />
+          <div v-if="isError('rw')" class="invalid-feedback">
+            <span v-if="isInvalid('rw', 'required')">*Wajib diisi</span>
+            <span v-else-if="isInvalid('rw', 'alphaNum')">Alfabet atau Numerik</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
       <button class="btn btn-block btn-success fw-bold">Submit Data</button>
     </div>
   </form>
 </template>
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, numeric, maxLength, minLength, minValue } from "@vuelidate/validators";
+import { required, numeric, maxLength, minLength, minValue, alphaNum } from "@vuelidate/validators";
 import { imgFilesize, imgFormat } from "@/customValidator";
 import { JENISKELAMIN } from "@/enums";
 
@@ -195,6 +230,9 @@ export default {
         foto_kk: "",
         umur: "",
         jenis_kelamin: "",
+        alamat: "",
+        rt: "",
+        rw: "",
       },
       JENISKELAMIN,
       isSubmit: false,
@@ -239,6 +277,14 @@ export default {
         alamat: {
           required,
           maxLength: maxLength(255),
+        },
+        rt: {
+          required,
+          alphaNum,
+        },
+        rw: {
+          required,
+          alphaNum,
         },
       },
     };
