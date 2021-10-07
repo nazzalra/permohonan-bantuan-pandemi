@@ -52,6 +52,27 @@
     </div>
 
     <div class="form-group">
+      <label for="foto_ktp">Foto KTP</label>
+      <input
+        type="file"
+        @change="changeFoto($event, 'foto_ktp')"
+        id="foto_ktp"
+        name="foto_ktp"
+        class="form-control"
+        :class="{ 'is-invalid': isError('foto_ktp') }"
+      />
+      <div v-if="isError('foto_ktp')" class="invalid-feedback">
+        <span v-if="v$.userData.foto_ktp.required.$invalid">*Wajib diupload</span>
+        <span v-else-if="v$.userData.foto_ktp.imgFilesize.$invalid"
+          >Ukuran file melebihi ukuran maksimal ( > 2MB)</span
+        >
+        <span v-else-if="v$.userData.foto_ktp.imgFormat.$invalid"
+          >Format file tidak didukung. Gunakan format JPG,JPEG,PNG atau BMP</span
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
       <button class="btn btn-block btn-success">Submit Data</button>
     </div>
   </form>
@@ -59,6 +80,9 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { required, numeric, maxLength, minLength } from "@vuelidate/validators";
+const imgFilesize = (value) => (value.size / (1024 * 1024)).toFixed(2) < 2;
+const imgFormat = (value) =>
+  ["image/png", "image/jpeg", "image/jpg", "image/bmp"].includes(value.type);
 export default {
   setup() {
     return {
@@ -71,6 +95,7 @@ export default {
         nama: "",
         nik: "",
         nkk: "",
+        foto_ktp: "",
       },
       isSubmit: false,
     };
@@ -93,6 +118,11 @@ export default {
           maxLength: maxLength(16),
           minLength: minLength(16),
         },
+        foto_ktp: {
+          required,
+          imgFilesize,
+          imgFormat,
+        },
       },
     };
   },
@@ -104,6 +134,13 @@ export default {
     },
     isError(data) {
       return this.isSubmit && this.v$.userData[data].$error;
+    },
+    changeFoto(e, data) {
+      if (!e.target.files.length) {
+        this.userData[data] = "";
+        return;
+      }
+      this.userData[data] = e.target.files[0];
     },
   },
 };
