@@ -11,7 +11,7 @@
         :class="{ 'is-invalid': isError('nama') }"
       />
       <div v-if="isError('nama')" class="invalid-feedback">
-        <span v-if="v$.userData.nama.required.$invalid">*Wajib diisi</span>
+        <span v-if="isInvalid('nama', 'required')">*Wajib diisi</span>
       </div>
     </div>
 
@@ -26,10 +26,10 @@
         :class="{ 'is-invalid': isError('nik') }"
       />
       <div v-if="isError('nik')" class="invalid-feedback">
-        <span v-if="v$.userData.nik.required.$invalid">*Wajib diisi</span>
-        <span v-else-if="v$.userData.nik.numeric.$invalid">NIK hanya terdiri dari angka</span>
-        <span v-else-if="v$.userData.nik.minLength.$invalid">NIK kurang dari 16 digit</span>
-        <span v-else-if="v$.userData.nik.maxLength.$invalid">NIK lebih dari 16 digit</span>
+        <span v-if="isInvalid('nik', 'required')">*Wajib diisi</span>
+        <span v-else-if="isInvalid('nik', 'numeric')">NIK hanya terdiri dari angka</span>
+        <span v-else-if="isInvalid('nik', 'minLength')">NIK kurang dari 16 digit</span>
+        <span v-else-if="isInvalid('nik', 'maxLength')">NIK lebih dari 16 digit</span>
       </div>
     </div>
 
@@ -44,10 +44,10 @@
         :class="{ 'is-invalid': isError('nkk') }"
       />
       <div v-if="isError('nkk')" class="invalid-feedback">
-        <span v-if="v$.userData.nkk.required.$invalid">*Wajib diisi</span>
-        <span v-else-if="v$.userData.nkk.numeric.$invalid">NIK hanya terdiri dari angka</span>
-        <span v-else-if="v$.userData.nkk.minLength.$invalid">NIK kurang dari 16 digit</span>
-        <span v-else-if="v$.userData.nkk.maxLength.$invalid">NIK lebih dari 16 digit</span>
+        <span v-if="isInvalid('nkk', 'required')">*Wajib diisi</span>
+        <span v-else-if="isInvalid('nkk', 'numeric')">NKK hanya terdiri dari angka</span>
+        <span v-else-if="isInvalid('nkk', 'minLength')">NKK kurang dari 16 digit</span>
+        <span v-else-if="isInvalid('nkk', 'maxLength')">NKK lebih dari 16 digit</span>
       </div>
     </div>
 
@@ -62,11 +62,11 @@
         :class="{ 'is-invalid': isError('foto_ktp') }"
       />
       <div v-if="isError('foto_ktp')" class="invalid-feedback">
-        <span v-if="v$.userData.foto_ktp.required.$invalid">*Wajib diupload</span>
-        <span v-else-if="v$.userData.foto_ktp.imgFilesize.$invalid"
+        <span v-if="isInvalid('foto_ktp', 'required')">*Wajib diupload</span>
+        <span v-else-if="isInvalid('foto_ktp', 'imgFilesize')"
           >Ukuran file melebihi ukuran maksimal ( > 2MB)</span
         >
-        <span v-else-if="v$.userData.foto_ktp.imgFormat.$invalid"
+        <span v-else-if="isInvalid('foto_ktp', 'imgFormat')"
           >Format file tidak didukung. Gunakan format JPG,JPEG,PNG atau BMP</span
         >
       </div>
@@ -140,6 +140,9 @@ export default {
         return;
       }
       this.userData[data] = e.target.files[0];
+    },
+    isInvalid(data, validator) {
+      return this.v$.userData[data][validator].$invalid;
     },
   },
 };
