@@ -3,6 +3,7 @@
     <div class="my-2">
       <label for="nama" class="fw-bold my-1">Nama</label>
       <input
+        ref="userData.nama"
         type="text"
         v-model="userData.nama"
         name="nama"
@@ -19,6 +20,7 @@
       <div class="input-group has-validation">
         <label for="nik" class="fw-bold input-group-text">NIK</label>
         <input
+          ref="userData.nik"
           type="number"
           v-model="userData.nik"
           id="nik"
@@ -39,6 +41,7 @@
       <div class="input-group has-validation">
         <label for="nkk" class="fw-bold input-group-text">NKK</label>
         <input
+          ref="userData.nkk"
           type="number"
           v-model="userData.nkk"
           id="nkk"
@@ -58,6 +61,7 @@
     <div class="my-2">
       <label for="foto_ktp" class="fw-bold my-1">Foto KTP</label>
       <input
+        ref="userData.foto_ktp"
         type="file"
         @change="changeFoto($event, 'foto_ktp')"
         id="foto_ktp"
@@ -79,6 +83,7 @@
     <div class="my-2">
       <label for="foto_kk" class="fw-bold my-1">Foto KK</label>
       <input
+        ref="userData.foto_kk"
         type="file"
         @change="changeFoto($event, 'foto_kk')"
         id="foto_kk"
@@ -103,6 +108,7 @@
           <label for="umur" class="fw-bold my-1">Umur</label>
           <div class="input-group has-validation">
             <input
+              ref="userData.umur"
               type="number"
               v-model="userData.umur"
               id="umur"
@@ -129,6 +135,7 @@
           :class="{ 'is-invalid': isError('jenis_kelamin') }"
         >
           <input
+            ref="userData.jenis_kelamin"
             class="form-check-input"
             type="radio"
             name="jenis_kelamin"
@@ -162,6 +169,7 @@
     <div class="my-2">
       <label for="alamat" class="fw-bold my-1">Alamat</label>
       <input
+        ref="userData.alamat"
         type="text"
         v-model="userData.alamat"
         id="alamat"
@@ -181,6 +189,7 @@
           <div class="input-group has-validation">
             <span class="input-group-text fw-bold">RT</span>
             <input
+              ref="userData.rt"
               type="text"
               v-model="userData.rt"
               id="rt"
@@ -198,6 +207,7 @@
           <div class="input-group has-validation">
             <span class="input-group-text fw-bold">RW</span>
             <input
+              ref="userData.rw"
               type="text"
               v-model="userData.rw"
               id="rw"
@@ -224,6 +234,7 @@
       <div class="input-group has-validation">
         <span class="input-group-text fw-bold">Rp.</span>
         <input
+          ref="userData.penghasilan.sebelum_pandemi"
           type="number"
           v-model="userData.penghasilan.sebelum_pandemi"
           id="penghasilan_sebelum_pandemi"
@@ -246,6 +257,7 @@
       <div class="input-group has-validation">
         <span class="input-group-text fw-bold">Rp.</span>
         <input
+          ref="userData.penghasilan.setelah_pandemi"
           type="number"
           v-model="userData.penghasilan.setelah_pandemi"
           id="penghasilan_setelah_pandemi"
@@ -263,6 +275,7 @@
       <div>
         <div class="form-check" :class="{ 'is-invalid': isError('alasan') }">
           <input
+            ref="userData.alasan.default"
             class="form-check-input"
             type="radio"
             name="alasan"
@@ -303,6 +316,7 @@
         </div>
         <div v-if="userData.alasan.default == ALASANBANTUAN['4']">
           <input
+            ref="userData.alasan.manual"
             type="text"
             class="form-control"
             v-model="userData.alasan.manual"
@@ -318,6 +332,7 @@
 
     <div class="mt-4 form-check">
       <input
+        ref="userData.persetujuan"
         type="checkbox"
         v-model="userData.persetujuan"
         @change="v$.userData.persetujuan.$touch()"
@@ -445,7 +460,9 @@ export default {
           },
         },
         persetujuan: {
-          required,
+          required(val) {
+            return val;
+          },
         },
       },
     };
@@ -454,7 +471,11 @@ export default {
     onSubmit() {
       this.isSubmit = true;
       this.v$.$touch();
-      if (this.v$.error) return;
+      if (this.v$.$error) {
+        this.$refs[this.v$.$errors[0].$propertyPath].focus();
+        return;
+      }
+      console.log(this.v$);
     },
     isError(data) {
       let arr_data = data.split(".");
