@@ -16,38 +16,42 @@
     </div>
 
     <div class="my-2">
-      <label for="nik" class="fw-bold my-1">NIK</label>
-      <input
-        type="number"
-        v-model="userData.nik"
-        id="nik"
-        name="nik"
-        class="form-control"
-        :class="{ 'is-invalid': isError('nik') }"
-      />
-      <div v-if="isError('nik')" class="invalid-feedback">
-        <span v-if="isInvalid('nik', 'required')">*Wajib diisi</span>
-        <span v-else-if="isInvalid('nik', 'numeric')">NIK hanya terdiri dari angka</span>
-        <span v-else-if="isInvalid('nik', 'minLength')">NIK kurang dari 16 digit</span>
-        <span v-else-if="isInvalid('nik', 'maxLength')">NIK lebih dari 16 digit</span>
+      <div class="input-group has-validation">
+        <label for="nik" class="fw-bold input-group-text">NIK</label>
+        <input
+          type="number"
+          v-model="userData.nik"
+          id="nik"
+          name="nik"
+          class="form-control"
+          :class="{ 'is-invalid': isError('nik') }"
+        />
+        <div v-if="isError('nik')" class="invalid-feedback">
+          <span v-if="isInvalid('nik', 'required')">*Wajib diisi</span>
+          <span v-else-if="isInvalid('nik', 'numeric')">NIK hanya terdiri dari angka</span>
+          <span v-else-if="isInvalid('nik', 'minLength')">NIK kurang dari 16 digit</span>
+          <span v-else-if="isInvalid('nik', 'maxLength')">NIK lebih dari 16 digit</span>
+        </div>
       </div>
     </div>
 
     <div class="my-2">
-      <label for="nkk" class="fw-bold my-1">NKK</label>
-      <input
-        type="number"
-        v-model="userData.nkk"
-        id="nkk"
-        name="nkk"
-        class="form-control"
-        :class="{ 'is-invalid': isError('nkk') }"
-      />
-      <div v-if="isError('nkk')" class="invalid-feedback">
-        <span v-if="isInvalid('nkk', 'required')">*Wajib diisi</span>
-        <span v-else-if="isInvalid('nkk', 'numeric')">NKK hanya terdiri dari angka</span>
-        <span v-else-if="isInvalid('nkk', 'minLength')">NKK kurang dari 16 digit</span>
-        <span v-else-if="isInvalid('nkk', 'maxLength')">NKK lebih dari 16 digit</span>
+      <div class="input-group has-validation">
+        <label for="nkk" class="fw-bold input-group-text">NKK</label>
+        <input
+          type="number"
+          v-model="userData.nkk"
+          id="nkk"
+          name="nkk"
+          class="form-control"
+          :class="{ 'is-invalid': isError('nkk') }"
+        />
+        <div v-if="isError('nkk')" class="invalid-feedback">
+          <span v-if="isInvalid('nkk', 'required')">*Wajib diisi</span>
+          <span v-else-if="isInvalid('nkk', 'numeric')">NKK hanya terdiri dari angka</span>
+          <span v-else-if="isInvalid('nkk', 'minLength')">NKK kurang dari 16 digit</span>
+          <span v-else-if="isInvalid('nkk', 'maxLength')">NKK lebih dari 16 digit</span>
+        </div>
       </div>
     </div>
 
@@ -97,18 +101,21 @@
       <div class="row">
         <div class="col-sm-5">
           <label for="umur" class="fw-bold my-1">Umur</label>
-          <input
-            type="number"
-            v-model="userData.umur"
-            id="umur"
-            name="umur"
-            class="form-control"
-            :class="{ 'is-invalid': isError('umur') }"
-          />
-          <div v-if="isError('umur')" class="invalid-feedback">
-            <span v-if="isInvalid('umur', 'required')">*Wajib diisi</span>
-            <span v-else-if="isInvalid('umur', 'numeric')">*Umur hanya terdiri dari angka</span>
-            <span v-else-if="isInvalid('umur', 'minValue')">*Minimal berumur 25 tahun</span>
+          <div class="input-group has-validation">
+            <input
+              type="number"
+              v-model="userData.umur"
+              id="umur"
+              name="umur"
+              class="form-control"
+              :class="{ 'is-invalid': isError('umur') }"
+            />
+            <span class="input-group-text fw-bold">Tahun</span>
+            <div v-if="isError('umur')" class="invalid-feedback">
+              <span v-if="isInvalid('umur', 'required')">*Wajib diisi</span>
+              <span v-else-if="isInvalid('umur', 'numeric')">*Umur hanya terdiri dari angka</span>
+              <span v-else-if="isInvalid('umur', 'minValue')">*Minimal berumur 25 tahun</span>
+            </div>
           </div>
         </div>
       </div>
@@ -168,36 +175,40 @@
       </div>
     </div>
 
-    <div class="my-2">
+    <div>
       <div class="row">
-        <div class="col-3">
-          <input
-            type="text"
-            v-model="userData.rt"
-            id="rt"
-            name="rt"
-            class="form-control"
-            :class="{ 'is-invalid': isError('rt') }"
-            placeholder="RT"
-          />
-          <div v-if="isError('rt')" class="invalid-feedback">
-            <span v-if="isInvalid('rt', 'required')">*Wajib diisi</span>
-            <span v-else-if="isInvalid('rt', 'alphaNum')">Alfabet atau Numerik</span>
+        <div class="col-4">
+          <div class="input-group has-validation">
+            <span class="input-group-text fw-bold">RT</span>
+            <input
+              type="text"
+              v-model="userData.rt"
+              id="rt"
+              name="rt"
+              class="form-control"
+              :class="{ 'is-invalid': isError('rt') }"
+            />
+            <div v-if="isError('rt')" class="invalid-feedback">
+              <span v-if="isInvalid('rt', 'required')">*Wajib diisi</span>
+              <span v-else-if="isInvalid('rt', 'alphaNum')">Alfabet atau Numerik</span>
+            </div>
           </div>
         </div>
-        <div class="col-3">
-          <input
-            type="text"
-            v-model="userData.rw"
-            id="rw"
-            name="rw"
-            class="form-control"
-            :class="{ 'is-invalid': isError('rw') }"
-            placeholder="RW"
-          />
-          <div v-if="isError('rw')" class="invalid-feedback">
-            <span v-if="isInvalid('rw', 'required')">*Wajib diisi</span>
-            <span v-else-if="isInvalid('rw', 'alphaNum')">Alfabet atau Numerik</span>
+        <div class="col-4">
+          <div class="input-group has-validation">
+            <span class="input-group-text fw-bold">RW</span>
+            <input
+              type="text"
+              v-model="userData.rw"
+              id="rw"
+              name="rw"
+              class="form-control"
+              :class="{ 'is-invalid': isError('rw') }"
+            />
+            <div v-if="isError('rw')" class="invalid-feedback">
+              <span v-if="isInvalid('rw', 'required')">*Wajib diisi</span>
+              <span v-else-if="isInvalid('rw', 'alphaNum')">Alfabet atau Numerik</span>
+            </div>
           </div>
         </div>
       </div>
@@ -210,16 +221,18 @@
           formatRupiah(userData.penghasilan.sebelum_pandemi)
         }}</span>
       </label>
-      <input
-        type="number"
-        v-model="userData.penghasilan.sebelum_pandemi"
-        id="penghasilan_sebelum_pandemi"
-        class="form-control"
-        :class="{ 'is-invalid': isError('penghasilan.sebelum_pandemi') }"
-        placeholder="Rp."
-      />
-      <div v-if="isError('penghasilan.sebelum_pandemi')" class="invalid-feedback">
-        <span v-if="isInvalid('penghasilan.sebelum_pandemi', 'required')">*Wajib diisi</span>
+      <div class="input-group has-validation">
+        <span class="input-group-text fw-bold">Rp.</span>
+        <input
+          type="number"
+          v-model="userData.penghasilan.sebelum_pandemi"
+          id="penghasilan_sebelum_pandemi"
+          class="form-control"
+          :class="{ 'is-invalid': isError('penghasilan.sebelum_pandemi') }"
+        />
+        <div v-if="isError('penghasilan.sebelum_pandemi')" class="invalid-feedback">
+          <span v-if="isInvalid('penghasilan.sebelum_pandemi', 'required')">*Wajib diisi</span>
+        </div>
       </div>
     </div>
 
@@ -230,16 +243,18 @@
           formatRupiah(userData.penghasilan.setelah_pandemi)
         }}</span>
       </label>
-      <input
-        type="number"
-        v-model="userData.penghasilan.setelah_pandemi"
-        id="penghasilan_setelah_pandemi"
-        class="form-control"
-        :class="{ 'is-invalid': isError('penghasilan.setelah_pandemi') }"
-        placeholder="Rp."
-      />
-      <div v-if="isError('penghasilan.setelah_pandemi')" class="invalid-feedback">
-        <span v-if="isInvalid('penghasilan.setelah_pandemi', 'required')">*Wajib diisi</span>
+      <div class="input-group has-validation">
+        <span class="input-group-text fw-bold">Rp.</span>
+        <input
+          type="number"
+          v-model="userData.penghasilan.setelah_pandemi"
+          id="penghasilan_setelah_pandemi"
+          class="form-control"
+          :class="{ 'is-invalid': isError('penghasilan.setelah_pandemi') }"
+        />
+        <div v-if="isError('penghasilan.setelah_pandemi')" class="invalid-feedback">
+          <span v-if="isInvalid('penghasilan.setelah_pandemi', 'required')">*Wajib diisi</span>
+        </div>
       </div>
     </div>
 
